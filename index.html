@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <div class="container">
+        <div class="box-container" id="hero">
+            <img src="image.png" alt="">
+            <div class="text">
+                <h1>Resume Builder</h1>
+                <p>Let your skills introduce you before you speak</p>
+                <button class="btn" onclick="showForm()">Build Your Resume</button>
+            </div>
+        </div>
+        <div class="form-section" id="form">
+            <h2>Resume Form</h2>
+            <div class="input">
+                <input type="text" class="box" id="name" placeholder="Full Name">
+            </div>
+            <div class="input">
+                <input type="text" class="box" id="prof" placeholder="Enter Profession">
+            </div>
+            <div class="input">
+                <input type="email" class="box" id="email" placeholder="Email Address">
+                <input type="text" class="box" id="phone" placeholder="Phone Number">
+            </div>
+            <div class="input">
+                <select id="country" class="box">
+                    <option value="Select Your Country">Select Your Country</option>
+                    <option value="India">India</option>
+                    <option value="Russia">Russia</option>
+                    <option value="America">America</option>
+                    <option value="Japan">Japan</option>
+                    <option value="England">England</option>
+                </select>
+                <input type="text" class="box" id="city" placeholder="City name">
+            </div>
+            <div class="input">
+                <input type="text" class="box" id="linkedin" placeholder="Enter LinkedIn Link">
+                <input type="text" class="box" id="Github" placeholder="Enter Github Link">
+            </div>
+            <div class="row">
+                <p>About Ne</p>
+            </div>
+            <div class="input">
+                <textarea id="summary" class="box" placeholder="Write About Yourself"></textarea>
+            </div>
+            <div class="section" id="skills-section">
+                <div class="row">
+                    <p>Skills</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic class="row2">
+                    <div class="input">
+                        <span>Skill 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" id="skills" placeholder="skills(e.g., HTML, CSS, JS)">
+                        <input type="number" class="box" placeholder="Rate Your skill">
+                    </div>
+                </dic>
+            </div>
+
+            <div class="section" id="education-section">
+                <div class="row">
+                    <p>Education</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic class="row2">
+                    <div class="input">
+                        <span>Education 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" id="degree-name" placeholder="Degree Name">
+                        <input type="text" class="box" id="u-name" placeholder="University Name">
+                    </div>
+                    <div class="input">
+                        <input type="date" class="box" placeholder="Start Date">
+                        <input type="date" class="box" placeholder="End Date">
+                        <input type="checkbox" class="present">Present
+                    </div>
+                    <div class="detail-input">
+                        <div class="input">
+                            <input type="text" placeholder="Enter Details" class="box detail-input">
+                            <i class="fa-sloid fa-plus add-btn"></i>
+                        </div>
+                        <ul class="details-list" id="exp-details"></ul>
+                    </div>
+                </dic>
+            </div>
+
+            <div class="section" id="experience-section">
+                <div class="row">
+                    <p>Experience</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic class="row2">
+                    <div class="input">
+                        <span>Experience 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" id="p-name" placeholder="Post Name">
+                        <input type="text" class="box" id="c-name" placeholder="Company Name">
+                    </div>
+                    <div class="input">
+                        <input type="date" class="box" placeholder="Start Date">
+                        <input type="date" class="box" placeholder="End Date">
+                        <input type="checkbox" class="present">Present
+                    </div>
+                    <div class="detail-input">
+                        <div class="input">
+                            <input type="text" placeholder="Enter Details" class="box detail-input">
+                            <i class="fafa-sloid fa-plus add-btn"></i>
+                        </div>
+                        <ul class="details-list" id="edu-details"></ul>
+                    </div>
+                </dic>
+            </div>
+
+            <div class="section" id="achievements-section">
+                <div class="row">
+                    <p>Achievements</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic class="row2">
+                    <div class="input">
+                        <span>Achievement 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" id="a-name" placeholder="Achievements title">
+                    </div>
+                    <div class="detail-input">
+                        <div class="input">
+                            <input type="text" placeholder="Enter Details" class="box detail-input">
+                            <i class="fafa-sloid fa-plus add-btn"></i>
+                        </div>
+                        <ul class="details-list" id="achiv-details"></ul>
+                    </div>
+                </dic>
+            </div>
+
+            <div class="section" id="hobby-section">
+                <div class="row">
+                    <p>Hobbies</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic class="row2">
+                    <div class="input">
+                        <span>Hobby 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" placeholder="Hobbies">
+                    </div>
+                </dic>
+            </div>
+
+            <div class="section" id="language-section">
+                <div class="row">
+                    <p>Language</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic class="row2">
+                    <div class="input">
+                        <span>Language 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" placeholder="Languages (e.g.,Kannada, English, Hindi)">
+                    </div>
+                </dic>
+            </div>
+
+            <div class="section" id="project-section">
+                <div class="row">
+                    <p>Project</p>
+                    <i class="fa-solid fa-plus add-btn"></i>
+                </div>
+                <dic clas="row2">
+                    <div class="input">
+                        <span>Project 1</span>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="box" id="project-name" placeholder="Project Name">
+                    </div>
+                    <div class="input">
+                        <input type="date" class="box" placeholder="Start Date">
+                        <input type="date" class="box" placeholder="End Date">
+                        <input type="checkbox" class="present">Present
+                    </div>
+                    <div class="detail-input">
+                        <div class="input">
+                            <input type="text" placeholder="Enter Details" class="box detail-input">
+                            <i class="fafa-sloid fa-plus add-btn"></i>
+                        </div>
+                        <ul class="details-list" id="proj-details"></ul>
+                    </div>
+                </dic>
+            </div>
+            <button class="btn" onclick="handleGenerateResume()">Generate Resume</button>
+        </div>
+        <div class="resume-section" id="resume">
+            <header>
+                <h1 id="r-name">John Doe</h1>
+                <h4 id="r-proof">Web Developer</h4>
+                <div class="flex">
+                    <h5>Email:</h5><p id="r-email">johndoe@example.com</p> |
+                    <h5>Phone:</h5><p id="r-phone">+91 9482572792</p> |
+                </div>
+                <div class="flex">
+                    <h5>LinkedIn:</h5><p id="r-linkedin">linkedin.com/in/johndoe</p> |
+                    <h5>Github:</h5><p id="r-github">github.com/johndoe</p> |
+                </div>
+            </header>
+
+            <section class="summmary">
+                <h2><i class="fa-solid fa-user-tie"></i>About Me</h2>
+                <p id="r-summary"></p>
+            </section>
+
+            <section class="experience">
+                <h2><i class="fa-solid fa-briefcase"></i>Experience</h2>
+                <div id="experience-display"></div>
+            </section>
+
+            <section class="education">
+                <h2><i class="fa-solid fa-graduation-cap"></i>Education</h2>
+                <div id="education-display"></div>
+            </section>
+
+            <section class="project">
+                <h2><i class="fa-solid fa-desktop"></i>Project</h2>
+                <div id="experience-display"></div>
+            </section>
+
+            <section class="skills">
+                <h2><i class="fa-solid fa-rocket"></i>Skills</h2>
+                <ul></ul>
+            </section>
+
+            <section class="achievements">
+                <h2><i class="fa-solid fa-trophy"></i>Achievements</h2>
+                <div id="achievements-display"></div>
+            </section>
+
+            <section class="languages">
+                <h2><i class="fa-solid fa-globe"></i>Languages</h2>
+                <ul></ul>
+            </section>
+
+            <section class="hobbies">
+                <h2><i class="fa-solid fa-bullseye"></i>Languages</h2>
+                <ul></ul>
+            </section>
+
+            <button onclick="editResume()" class="btn">Edit Resume</button>
+            <button onclick="downloadResume()" class="btn">Download Resume</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
