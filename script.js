@@ -30,6 +30,7 @@ function generateResume(){
     document.getElementById('r-linkedin').innerText=document.getElementById('linkedin').value
     document.getElementById('r-github').innerText=document.getElementById('github').value
     document.getElementById('r-summary').innerText=document.getElementById('summary').value
+
     const experienceSections=document.quesrySelectAll('#experience-section.row2');
     let experienceHTML = '';
     experienceSections.foreach(section=>{
@@ -76,8 +77,8 @@ function generateResume(){
 
     const projectSections=document.quesrySelectAll('#project-section.row2');
     let projectHTML = '';
-    educationSections.foreach(section=>{
-        const project = section.querySelector('#p-name')?.value;
+    projectSections.foreach(section=>{
+        const projectName = section.querySelector('#p-name')?.value;
         const dates = section.querySelectorAll('input[type="date"]');
         const start = dates[0]?.value || '';
         const end = section.querySelector('.present')?.checked ? 'Present' : (dates[0]?.value || '');
@@ -87,11 +88,72 @@ function generateResume(){
 
         projectHTML += `
         <div>
-            <h3>${project}</h3>
+            <h3>${projectName}</h3>
             <span>${start} - ${end} </span>
             <ul>${details}</ul>
         </div>
         `;
     });
     document.querySelector('#project-display').innerHTML = projectHTML;
+
+    const achievementSections=document.quesrySelectAll('#achievements-section.row2');
+    let achievementHTML = '';
+    achievementSections.foreach(section=>{
+        const title = section.querySelector('#p-name')?.value;
+
+        const detailList = section.querySelectorAll('.details-list li');
+        const details = Array.from(detailList).map(li=> `<li>${li.textContent}<li>`).join('');
+
+        achievementHTML += `
+        <div>
+            <h3>${title}</h3>
+            <ul>${details}</ul>
+        </div>
+        `;
+    });
+    document.querySelector('#achievement-display').innerHTML = achievementHTML;
+
+    const skillsSection = document.querySelector('#skills-section');
+    const textInputs = skillsSection.querySelectorAll('input[type="text"]');
+    const numberInputs = skillsSection.querySelectorAll('input[type="number"]');
+    const skillList = document.querySelector('.skills ul');
+    skillList.innerHTML = '';
+
+    for(let i = 0; i<textInputs.length; i++){
+        const skill = textInputs[i].value.trim();
+        const rating = numberInputs[i].value.trim();
+
+        if (skill !== ''){
+            const li = document.createElement('li');
+            li.style.listStylePosition = "square";
+            li.innerText = rating ?`${skill} - ${rating}/10`: skill;
+            skillList.appendChild(li);
+        }
+    }
+
+    const languageSection = document.querySelector('#language-section');
+    const languageInputs = languageSection.querySelectorAll('input[type="text"]');
+    const languageList = document.querySelector('.languages ul');
+    languageList.innerHTML = '';
+
+    languageInputs.forEach(input=>{
+        if(input.value.trim() !== ''){
+            const li = document.createElement('li');
+            li.innerText = input.value;
+            languageList.appendChild(li);
+        }
+    });
+
+    const hobbySection = document.querySelector('#hobby-section');
+    const hobbyInputs = hobbySection.querySelectorAll('input[type="text"]');
+    const hobbyList = document.querySelector('.hobbies ul');
+    hobbyList.innerHTML = '';
+
+    hobbyInputs.forEach(input=>{
+        if(input.value.trim() !== ''){
+            const li = document.createElement('li');
+            li.innerText = input.value;
+            hobbyList.appendChild(li);
+        }
+    });
 }
