@@ -25,13 +25,13 @@ function editResume() {
 
 function generateResume() {
     document.getElementById('r-name').innerText = document.getElementById('name').value;
-    document.getElementById('r-proof').innerText = document.getElementById('prof').value;
+    document.getElementById('r-proof').innerText = document.getElementById('proof').value;
     document.getElementById('r-email').innerText = document.getElementById('email').value;
     document.getElementById('r-phone').innerText = document.getElementById('phone').value;
     document.getElementById('r-country').innerText = document.getElementById('country').value;
     document.getElementById('r-city').innerText = document.getElementById('city').value;
     document.getElementById('r-linkedin').innerText = document.getElementById('linkedin').value;
-    document.getElementById('r-github').innerText = document.getElementById('Github').value;
+    document.getElementById('r-github').innerText = document.getElementById('github').value;
     document.getElementById('r-summary').innerText = document.getElementById('summary').value;
 
     // Experience Section
