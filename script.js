@@ -25,7 +25,7 @@ function editResume() {
 
 function generateResume() {
     document.getElementById('r-name').innerText = document.getElementById('name').value;
-    document.getElementById('r-proof').innerText = document.getElementById('proof').value;
+    document.getElementById('r-prof').innerText = document.getElementById('prof').value;
     document.getElementById('r-email').innerText = document.getElementById('email').value;
     document.getElementById('r-phone').innerText = document.getElementById('phone').value;
     document.getElementById('r-country').innerText = document.getElementById('country').value;
