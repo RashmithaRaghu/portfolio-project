@@ -1,169 +1,106 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('hero').style.display = 'flex';
-    document.getElementById('form').style.display = 'none';
-    document.getElementById('resume').style.display = 'none';
+    showSection('hero');
 });
 
+function showSection(sectionId) {
+    const sections = ['hero', 'form', 'resume'];
+    sections.forEach(id => {
+        document.getElementById(id).style.display = id === sectionId ? (id === 'hero' ? 'flex' : 'block') : 'none';
+    });
+}
+
 function showForm() {
-    document.getElementById('hero').style.display = 'none';
-    document.getElementById('form').style.display = 'block';
-    document.getElementById('resume').style.display = 'none';
+    showSection('form');
 }
 
 function handleGenerateResume() {
     generateResume();
-    document.getElementById('hero').style.display = 'none';
-    document.getElementById('form').style.display = 'none';
-    document.getElementById('resume').style.display = 'block';
+    showSection('resume');
 }
 
 function editResume() {
-    document.getElementById('hero').style.display = 'none';
-    document.getElementById('form').style.display = 'block';
-    document.getElementById('resume').style.display = 'none';
+    showSection('form');
 }
 
 function generateResume() {
-    document.getElementById('r-name').innerText = document.getElementById('name').value;
-    document.getElementById('r-prof').innerText = document.getElementById('prof').value;
-    document.getElementById('r-email').innerText = document.getElementById('email').value;
-    document.getElementById('r-phone').innerText = document.getElementById('phone').value;
-    document.getElementById('r-country').innerText = document.getElementById('country').value;
-    document.getElementById('r-city').innerText = document.getElementById('city').value;
-    document.getElementById('r-linkedin').innerText = document.getElementById('linkedin').value;
-    document.getElementById('r-github').innerText = document.getElementById('github').value;
-    document.getElementById('r-summary').innerText = document.getElementById('summary').value;
-
-    // Experience Section
-    const experienceSections = document.querySelectorAll('#experience-section .row2');
-    let experienceHTML = '';
-    experienceSections.forEach(section => {
-        const post = section.querySelector('#p-name')?.value;
-        const company = section.querySelector('#c-name')?.value;
-        const dates = section.querySelectorAll('input[type="date"]');
-        const start = dates[0]?.value || '';
-        const end = section.querySelector('.present')?.checked ? 'Present' : (dates[1]?.value || '');
-
-        const detailList = section.querySelectorAll('.details-list li');
-        const details = Array.from(detailList).map(li => `<li>${li.textContent}</li>`).join('');
-
-        experienceHTML += `
-        <div>
-            <h3>${post}</h3>
-            <span>${company} | ${start} - ${end}</span>
-            <ul>${details}</ul>
-        </div>
-        `;
+    // Basic Info
+    const fields = ['name', 'prof', 'email', 'phone', 'country', 'city', 'linkedin', 'github', 'summary'];
+    fields.forEach(f => {
+        document.getElementById(`r-${f}`).innerText = document.getElementById(f).value;
     });
-    document.querySelector('#experience-display').innerHTML = experienceHTML;
 
-    // Education Section
-    const educationSections = document.querySelectorAll('#education-section .row2');
-    let educationHTML = '';
-    educationSections.forEach(section => {
-        const degree = section.querySelector('#degree-name')?.value;
-        const university = section.querySelector('#u-name')?.value;
-        const dates = section.querySelectorAll('input[type="date"]');
-        const start = dates[0]?.value || '';
-        const end = section.querySelector('.present')?.checked ? 'Present' : (dates[1]?.value || '');
+    // Generate dynamic sections
+    generateSection('#experience-section .row2', '#experience-display', ['#p-name', '#c-name'], true);
+    generateSection('#education-section .row2', '#education-display', ['#degree-name', '#u-name'], true);
+    generateSection('#project-section .row2', '#project-display', ['#project-name'], true);
+    generateSection('#achievements-section .row2', '#achievements-display', ['#a-name'], false);
 
-        const detailList = section.querySelectorAll('.details-list li');
-        const details = Array.from(detailList).map(li => `<li>${li.textContent}</li>`).join('');
+    // Skills, Languages, Hobbies
+    generateList('#skills-section', '.skills ul', true);
+    generateList('#language-section', '.languages ul');
+    generateList('#hobby-section', '.hobbies ul');
+}
 
-        educationHTML += `
-        <div>
-            <h3>${degree}</h3>
-            <span>${university} | ${start} - ${end}</span>
-            <ul>${details}</ul>
-        </div>
-        `;
-    });
-    document.querySelector('#education-display').innerHTML = educationHTML;
+// ---------- Helper Functions ----------
 
-    // Project Section
-    const projectSections = document.querySelectorAll('#project-section .row2');
-    let projectHTML = '';
-    projectSections.forEach(section => {
-        const projectName = section.querySelector('#project-name')?.value;
-        const dates = section.querySelectorAll('input[type="date"]');
-        const start = dates[0]?.value || '';
-        const end = section.querySelector('.present')?.checked ? 'Present' : (dates[1]?.value || '');
+// Generic section generator
+function generateSection(sectionSelector, displaySelector, titleSelectors, includeDates) {
+    const sections = document.querySelectorAll(sectionSelector);
+    let html = '';
 
-        const detailList = section.querySelectorAll('.details-list li');
-        const details = Array.from(detailList).map(li => `<li>${li.textContent}</li>`).join('');
+    sections.forEach(section => {
+        const titleValues = titleSelectors.map(sel => section.querySelector(sel)?.value || '');
+        const titleHTML = titleValues.map(val => `<h3>${val}</h3>`).join(' ');
 
-        projectHTML += `
-        <div>
-            <h3>${projectName}</h3>
-            <span>${start} - ${end}</span>
-            <ul>${details}</ul>
-        </div>
-        `;
-    });
-    document.querySelector('#project-display').innerHTML = projectHTML;
-
-    // Achievements Section
-    const achievementSections = document.querySelectorAll('#achievements-section .row2');
-    let achievementHTML = '';
-    achievementSections.forEach(section => {
-        const title = section.querySelector('#a-name')?.value;
-
-        const detailList = section.querySelectorAll('.details-list li');
-        const details = Array.from(detailList).map(li => `<li>${li.textContent}</li>`).join('');
-
-        achievementHTML += `
-        <div>
-            <h3>${title}</h3>
-            <ul>${details}</ul>
-        </div>
-        `;
-    });
-    document.querySelector('#achievements-display').innerHTML = achievementHTML;
-
-    // Skills Section
-    const skillsSection = document.querySelector('#skills-section');
-    const textInputs = skillsSection.querySelectorAll('input[type="text"]');
-    const numberInputs = skillsSection.querySelectorAll('input[type="number"]');
-    const skillList = document.querySelector('.skills ul');
-    skillList.innerHTML = '';
-
-    for (let i = 0; i < textInputs.length; i++) {
-        const skill = textInputs[i].value.trim();
-        const rating = numberInputs[i].value.trim();
-
-        if (skill !== '') {
-            const li = document.createElement('li');
-            li.style.listStyleType = "square";
-            li.innerText = rating ? `${skill} - ${rating}/10` : skill;
-            skillList.appendChild(li);
+        let dateHTML = '';
+        if (includeDates) {
+            const dates = section.querySelectorAll('input[type="date"]');
+            const start = dates[0]?.value || '';
+            const end = section.querySelector('.present')?.checked ? 'Present' : (dates[1]?.value || '');
+            dateHTML = `<span>${start} - ${end}</span>`;
         }
+
+        const detailList = section.querySelectorAll('.details-list li');
+        const details = Array.from(detailList).map(li => `<li>${li.textContent}</li>`).join('');
+
+        html += `
+        <div>
+            ${titleHTML}
+            ${dateHTML}
+            <ul>${details}</ul>
+        </div>`;
+    });
+
+    document.querySelector(displaySelector).innerHTML = html;
+}
+
+// Generic list generator for skills, languages, hobbies
+function generateList(sectionSelector, listSelector, includeRating = false) {
+    const section = document.querySelector(sectionSelector);
+    const list = document.querySelector(listSelector);
+    list.innerHTML = '';
+
+    if (includeRating) {
+        const textInputs = section.querySelectorAll('input[type="text"]');
+        const numberInputs = section.querySelectorAll('input[type="number"]');
+        for (let i = 0; i < textInputs.length; i++) {
+            const skill = textInputs[i].value.trim();
+            const rating = numberInputs[i]?.value.trim();
+            if (skill) {
+                const li = document.createElement('li');
+                li.style.listStyleType = "square";
+                li.innerText = rating ? `${skill} - ${rating}/10` : skill;
+                list.appendChild(li);
+            }
+        }
+    } else {
+        const inputs = section.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+            if (input.value.trim()) {
+                const li = document.createElement('li');
+                li.innerText = input.value;
+                list.appendChild(li);
+            }
+        });
     }
-
-    // Languages Section
-    const languageSection = document.querySelector('#language-section');
-    const languageInputs = languageSection.querySelectorAll('input[type="text"]');
-    const languageList = document.querySelector('.languages ul');
-    languageList.innerHTML = '';
-
-    languageInputs.forEach(input => {
-        if (input.value.trim() !== '') {
-            const li = document.createElement('li');
-            li.innerText = input.value;
-            languageList.appendChild(li);
-        }
-    });
-
-    // Hobbies Section
-    const hobbySection = document.querySelector('#hobby-section');
-    const hobbyInputs = hobbySection.querySelectorAll('input[type="text"]');
-    const hobbyList = document.querySelector('.hobbies ul');
-    hobbyList.innerHTML = '';
-
-    hobbyInputs.forEach(input => {
-        if (input.value.trim() !== '') {
-            const li = document.createElement('li');
-            li.innerText = input.value;
-            hobbyList.appendChild(li);
-        }
-    });
 }
