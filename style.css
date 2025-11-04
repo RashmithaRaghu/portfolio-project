@@ -1,3 +1,4 @@
+/* --- General Styles --- */
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -12,6 +13,7 @@ body {
     display: flex;
 }
 
+/* --- Front Page (Hero Section) --- */
 .box-container {
     text-align: center;
     padding: 40px 20px;
@@ -52,6 +54,7 @@ p {
     line-height: 1.2;
 }
 
+/* --- Buttons --- */
 .btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -65,96 +68,141 @@ p {
 .btn:hover {
     background: #0056b3;
 }
-.form-section, .resume-section{
+
+/* --- Form Section --- */
+.form-section {
     width: 50%;
     padding: 20px;
     margin: 20px auto;
     background-color: white;
-
 }
-.form-section h2{
+
+.form-section h2 {
     text-align: center;
 }
-.input{
+
+.input {
     margin: 1.3rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.box{
+
+.box {
     width: 100%;
     padding: 1rem;
     margin-right: 10px;
     border: 1px solid #ef29e9;
     outline: none;
 }
-.row{
+
+.row {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.fa-plus{
+
+.fa-plus {
     cursor: pointer;
 }
-span{
+
+span {
     width: 7rem;
     font-size: 0.9rem;
     color: #575757;
     margin-right: 1rem;
 }
-.detail-list{
-    list-style-type: disc;
-    padding-left: 20px;
-}
-.details-list li{
+
+.details-list li {
     margin-bottom: 6px;
-    position: relative;
 }
-header{
+
+/* --- Portfolio (Generated Resume) Section --- */
+.resume-section {
+    width: 80%;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    font-family: Arial, sans-serif;
+}
+
+.resume-section header {
     text-align: center;
-    margin-bottom: 10px;
-}
-section{
-    margin: 2rem 0;
-    line-height: 1rem;
-}
-h1{
-    margin: 0;
-    font-size: 2.5rem;
-}
-h2{
-    font-size: 1.2rem;
-    text-align: left;
-    padding-bottom: 5px;
     border-bottom: 2px solid #007bff;
-    color: #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
-h2 i{
-    font-size: 1rem;
-    padding-right: 5px;
-}
-h3{
-    font-size: 1.2rem;
-}
-ul{
-    padding: 0 40px;
-}
-ul li{
-    font-size: 15px;
-    line-height: 1.1;
+
+.resume-section h1 {
+    color: #007bff;
     margin: 5px 0;
 }
-.flex{
+
+.resume-section h4 {
+    color: #555;
+    font-weight: normal;
+    margin: 5px 0 10px;
+}
+
+.resume-section h5 {
+    display: inline;
+    color: #333;
+}
+
+.resume-section p {
+    display: inline;
+    margin-right: 10px;
+}
+
+.resume-section section {
+    margin-bottom: 25px;
+}
+
+.resume-section h2 {
+    font-size: 1.2rem;
+    color: #007bff;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.resume-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.resume-section li {
+    margin-bottom: 6px;
+}
+
+.resume-section .btn {
+    display: inline-block;
+    margin: 10px 10px 0 0;
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.resume-section .btn:hover {
+    background: #0056b3;
+}
+
+/* --- Flex Info Section (Email, Phone, etc.) --- */
+.flex {
     display: flex;
     justify-content: center;
     align-items: center;
-    line-height: 0.01rem;
-    padding: 0;
-    margin: 0;
+    line-height: 1rem;
+    flex-wrap: wrap;
 }
-.flex p{
-    padding-right: 5px;
-}
-h5{
-    padding: 0 5px;
+
+.flex p, .flex h5 {
+    margin: 2px 5px;
+    font-size: 0.9rem;
 }
