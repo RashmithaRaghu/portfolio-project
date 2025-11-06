@@ -23,27 +23,21 @@ function editResume() {
 }
 
 function generateResume() {
-    // Basic Info
     const fields = ['name', 'prof', 'email', 'phone', 'country', 'city', 'linkedin', 'github', 'summary'];
     fields.forEach(f => {
         document.getElementById(`r-${f}`).innerText = document.getElementById(f).value;
     });
 
-    // Generate dynamic sections
     generateSection('#experience-section .row2', '#experience-display', ['#p-name', '#c-name'], true);
     generateSection('#education-section .row2', '#education-display', ['#degree-name', '#u-name'], true);
     generateSection('#project-section .row2', '#project-display', ['#project-name'], true);
     generateSection('#achievements-section .row2', '#achievements-display', ['#a-name'], false);
 
-    // Skills, Languages, Hobbies
     generateList('#skills-section', '.skills ul', true);
     generateList('#language-section', '.languages ul');
     generateList('#hobby-section', '.hobbies ul');
 }
 
-// ---------- Helper Functions ----------
-
-// Generic section generator
 function generateSection(sectionSelector, displaySelector, titleSelectors, includeDates) {
     const sections = document.querySelectorAll(sectionSelector);
     let html = '';
@@ -74,7 +68,6 @@ function generateSection(sectionSelector, displaySelector, titleSelectors, inclu
     document.querySelector(displaySelector).innerHTML = html;
 }
 
-// Generic list generator for skills, languages, hobbies
 function generateList(sectionSelector, listSelector, includeRating = false) {
     const section = document.querySelector(sectionSelector);
     const list = document.querySelector(listSelector);
@@ -104,3 +97,33 @@ function generateList(sectionSelector, listSelector, includeRating = false) {
         });
     }
 }
+
+document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+        const type = this.dataset.type;
+        const section = this.closest(`#${type}-section`);
+        const row2 = section.querySelector('.row2');
+        const clone = row2.cloneNode(true);
+
+        clone.querySelectorAll('input').forEach(input => {
+            input.value = '';
+            if(input.classList.contains('end-date'))
+                input.disabled = false;
+            if(input.type === 'checkbox') input.checked = false;
+        });
+        clone.querySelectorAll('.details-list').forEach(list => list.innerHTML = '');
+        const label = clone.querySelector('span');
+        if(label){
+            const count = section.querySelectorAll('.row2').length + 1;
+            label.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} ${count}`;
+        }
+        const trash = document.createElement('i');
+        trash.className = 'fa-solid fa-trash trash-icon'
+        trash.addEventListener('click',()=>{
+            clone.remove();
+        });
+        clone.style.position = 'relative';
+        clone.appendChild(trash);
+        section.appendChild(clone);
+    });
+})
