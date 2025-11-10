@@ -13,7 +13,34 @@ function showForm() {
     showSection('form');
 }
 
+let profilePhotoDataUrl = '';
+const photoInput = document.getElementById('photo');
+if (photoInput) {
+  photoInput.addEventListener('change', function () {
+    const file = this.files && this.files[0];
+    if (!file) {
+      profilePhotoDataUrl = '';
+      return;
+    }
+    const maxBytes = 1.5 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      alert('Please choose an image smaller than 1.5 MB.');
+      this.value = '';
+      profilePhotoDataUrl = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profilePhotoDataUrl = e.target.result; 
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+
 function handleGenerateResume() {
+    if (!simpleValidate()) return;
     generateResume();
     showSection('resume');
 }
@@ -23,6 +50,15 @@ function editResume() {
 }
 
 function generateResume() {
+    const rphoto = document.getElementById('r-photo');
+    if (profilePhotoDataUrl && rphoto) {
+    rphoto.src = profilePhotoDataUrl;
+    rphoto.style.display = 'inline-block';
+    } else if (rphoto) {
+    rphoto.style.display = 'none';
+    rphoto.src = '';
+    }
+
     const fields = ['name', 'prof', 'email', 'phone', 'country', 'city', 'linkedin', 'github', 'summary'];
     fields.forEach(f => {
         document.getElementById(`r-${f}`).innerText = document.getElementById(f).value;
@@ -37,6 +73,10 @@ function generateResume() {
     generateList('#language-section', '.languages ul');
     generateList('#hobby-section', '.hobbies ul');
 }
+
+document.getElementById("phone").addEventListener("input", function () {
+  this.value = this.value.replace(/[^0-9]/g, ""); 
+});
 
 function generateSection(sectionSelector, displaySelector, titleSelectors, includeDates) {
     const sections = document.querySelectorAll(sectionSelector);
@@ -98,6 +138,37 @@ function generateList(sectionSelector, listSelector, includeRating = false) {
     }
 }
 
+function simpleValidate() {
+  document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+
+  const required = ['name','prof','email','phone','city','country','linkedin','github','summary'];
+  for (const id of required) {
+    const el = document.getElementById(id);
+    if (!el || !el.value.trim()) {          
+      el && el.classList.add('input-error'); 
+      el && el.focus(); 
+      el && el.scrollIntoView({behavior:'smooth', block:'center'});
+      return false;
+    }
+  }
+
+  const phone = document.getElementById('phone').value.trim();
+  if (!/^\d{10}$/.test(phone)) {
+    const el = document.getElementById('phone');
+    el.classList.add('input-error'); el.focus(); el.scrollIntoView({behavior:'smooth', block:'center'});
+    return false;
+  }
+
+  const email = document.getElementById('email').value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const el = document.getElementById('email');
+    el.classList.add('input-error'); el.focus(); el.scrollIntoView({behavior:'smooth', block:'center'});
+    return false;
+  }
+
+  return true;
+}
+
 document.querySelectorAll('.add-btn').forEach(btn => {
     btn.addEventListener('click', function(){
         const type = this.dataset.type;
@@ -126,4 +197,4 @@ document.querySelectorAll('.add-btn').forEach(btn => {
         clone.appendChild(trash);
         section.appendChild(clone);
     });
-})
+});
