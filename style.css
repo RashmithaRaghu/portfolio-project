@@ -209,3 +209,18 @@ span {
     right: 10px;
 
 }
+
+.input-error { border: 2px solid #e02424 !important; }
+
+#r-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  display: inline-block; 
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+
