@@ -20,14 +20,20 @@
         <div class="form-section" id="form">
             <h2>Portfolio Form</h2>
             <div class="input">
-                <input type="text" class="box" id="name" placeholder="Full Name">
+
+            <label>Photo</label>
+            <input type="file" id="photo" accept="image/*" />
+            </div>
+
+            <div class="input">
+                <input type="text" class="box" id="name" placeholder="Full Name" required>
             </div>
             <div class="input">
-                <input type="text" class="box" id="prof" placeholder="Enter Profession">
+                <input type="text" class="box" id="prof" placeholder="Enter Profession" required>
             </div>
             <div class="input">
-                <input type="email" class="box" id="email" placeholder="Email Address">
-                <input type="text" class="box" id="phone" placeholder="Phone Number">
+                <input type="email" class="box" id="email" name="email" placeholder="Email Address" pattern="[a-z0-9._%+-]+@gmail\.com$" required>
+                <input type="text" class="box" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" required>
             </div>
             <div class="input">
                 <select id="country" class="box">
@@ -202,8 +208,11 @@
             </div>
             <button class="btn" onclick="handleGenerateResume()">Generate Portfolio</button>
         </div>
+
         <div class="resume-section" id="resume">
             <header>
+                <img id="r-photo" alt="Profile photo" style="display:none" />
+
                 <h1 id="r-name"></h1>
                 <h4 id="r-prof"></h4>
                 <div class="flex">
@@ -261,7 +270,6 @@
             </section>
 
             <button onclick="editResume()" class="btn">Edit Portfolio</button>
-            <button onclick="downloadResume()" class="btn">Download Portfolio</button>
         </div>
     </div>
     <script src="script.js"></script>
